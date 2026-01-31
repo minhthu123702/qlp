@@ -5,9 +5,10 @@ import java.time.LocalDate;
 
 public class BookingCreateRequest {
 
-    private Integer customerId;
-    private Integer detailId;
 
+    private Integer bookingID;
+    private Integer detailId;
+    private Integer customerId;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate invoiceDate;
 
@@ -15,49 +16,56 @@ public class BookingCreateRequest {
     private int numberOfGuests;
     private String note;
 
-
     public Integer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public Integer getBookingID() {
+        return bookingID;
     }
 
     public Integer getDetailId() {
         return detailId;
     }
 
-    public void setDetailId(Integer detailId) {
-        this.detailId = detailId;
-    }
-
     public LocalDate getInvoiceDate() {
         return invoiceDate;
-    }
-
-    public void setInvoiceDate(LocalDate invoiceDate) {
-        this.invoiceDate = invoiceDate;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public int getNumberOfGuests() {
         return numberOfGuests;
     }
 
-    public void setNumberOfGuests(int numberOfGuests) {
-        this.numberOfGuests = numberOfGuests;
-    }
-
     public String getNote() {
         return note;
+    }
+
+    public void setBookingID(Integer bookingID) {
+        this.bookingID = bookingID;
+    }
+
+    public void setDetailId(Integer detailId) {
+        this.detailId = detailId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setInvoiceDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
     }
 
     public void setNote(String note) {

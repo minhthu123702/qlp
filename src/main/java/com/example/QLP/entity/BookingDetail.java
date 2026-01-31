@@ -1,5 +1,8 @@
 package com.example.QLP.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,15 +11,19 @@ import java.time.LocalDate;
 @Table(name = "booking_detail")
 public class BookingDetail {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "detail_id")
-    private Integer id;
+    private Integer bookingDetailId;
 
+
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id", nullable = false, unique = true)
+    @JoinColumn(name = "booking_id", unique = true)
     private Booking booking;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id", nullable = false)
     private Room room;
@@ -36,8 +43,8 @@ public class BookingDetail {
     @Column(name = "quantity")
     private int quantity;
 
-    public Integer getId() {
-        return id;
+    public Integer getBookingDetailId() {
+        return bookingDetailId;
     }
 
     public Booking getBooking() {
@@ -67,9 +74,19 @@ public class BookingDetail {
     public int getQuantity() {
         return quantity;
     }
+    @JsonProperty("bookingID")
+    public Integer getBookingId() {
+        return booking != null ? booking.getBookingID() : null;
 
-    public void setId(Integer id) {
-        this.id = id;
+    }
+
+
+    @JsonProperty("roomId")
+    public Integer getDetailId() {
+        return room != null ? room.getRoomId() : null;
+    }
+    public void setBookingDetailId(Integer bookingDetailId) {
+        this.bookingDetailId = bookingDetailId;
     }
 
     public void setBooking(Booking booking) {

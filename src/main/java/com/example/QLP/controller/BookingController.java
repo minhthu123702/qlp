@@ -30,7 +30,11 @@ public class BookingController {
     public Booking getBookingById(@PathVariable Integer Bookingid){
         return bookingService.getBookingById(Bookingid);
     }
-
+    @PutMapping("/{Bookingid}")
+    public Booking updateBooking(@PathVariable Integer Bookingid, @RequestBody BookingCreateRequest request){
+        // Gọi sang service để xử lý logic update
+        return bookingService.updateBooking(Bookingid, request);
+    }
     @DeleteMapping("/{Bookingid}")
     public void deleteBooking(@PathVariable Integer Bookingid){
         bookingService.deleteBooking(Bookingid);

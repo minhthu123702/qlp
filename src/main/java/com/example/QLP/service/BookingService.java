@@ -31,11 +31,13 @@ public class BookingService {
         Customer customer = customerRepository.findById(request.getCustomerId())
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
-        BookingDetail detail = bookingDetailRepository.findById(request.getDetailId())
-                .orElseThrow(() -> new RuntimeException("Detail not found"));
-
         booking.setCustomer(customer);
-        booking.setDetail(detail);
+
+        if (request.getDetailId() != null) {
+            BookingDetail detail = bookingDetailRepository.findById(request.getDetailId())
+                    .orElseThrow(() -> new RuntimeException("Detail not found"));
+            booking.setDetail(detail);
+        }
         booking.setInvoiceDate(request.getInvoiceDate());
         booking.setNote(request.getNote());
         booking.setNumberOfGuests(request.getNumberOfGuests());
@@ -60,4 +62,31 @@ public class BookingService {
         }
         bookingReponsitory.deleteById(id);
     }
+
+    public Booking updateBooking(Integer bookingid, BookingCreateRequest request) {
+
+        Booking booking = bookingReponsitory.findById(bookingid)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        Customer customer = customerRepository.findById(request.getCustomerId())
+                .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        booking.setCustomer(customer);
+
+        if (request.getDetailId() != null) {
+            BookingDetail detail = bookingDetailRepository.findById(request.getDetailId())
+                    .orElseThrow(() -> new RuntimeException("Detail not found"));
+            booking.setDetail(detail);
+        }
+
+
+        booking.setInvoiceDate(request.getInvoiceDate());
+        booking.setNote(request.getNote());
+        booking.setNumberOfGuests(request.getNumberOfGuests());
+        booking.setStatus(request.getStatus());
+
+        return bookingReponsitory.save(booking);
+
+
+}
 }

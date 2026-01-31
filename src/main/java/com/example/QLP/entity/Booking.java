@@ -1,5 +1,9 @@
 package com.example.QLP.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -14,12 +18,12 @@ public class Booking {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
+    @JsonIgnore
     private Customer customer;
 
-    @OneToOne(
-            fetch = FetchType.LAZY
-    )
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "detail_id", unique = true)
+    @JsonIgnore
     private BookingDetail detail;
 
     @Column(name = "invoice_date")
@@ -61,9 +65,19 @@ public class Booking {
     public String getNote() {
         return note;
     }
+    @JsonProperty("customerId")
+    public Integer getCustomerId() {
+        return customer != null ? customer.getCustomerId() : null;
 
-    public void setId(Integer id) {
-        this.bookingID = id;
+    }
+
+
+    @JsonProperty("detailId")
+    public Integer getDetailId() {
+        return detail != null ? detail.getBookingDetailId() : null;
+    }
+    public void setBookingID(Integer bookingID) {
+        this.bookingID = bookingID;
     }
 
     public void setCustomer(Customer customer) {

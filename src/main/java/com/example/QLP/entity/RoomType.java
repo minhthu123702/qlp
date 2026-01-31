@@ -1,5 +1,6 @@
 package com.example.QLP.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -19,13 +20,12 @@ public class RoomType {
     @Column(name = "description", length = 255)
     private String description;
 
-
     @Column(name = "amount")
     private Integer amount;
 
     @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Room> rooms;
-
 
     public Integer getId() {
         return id;
@@ -66,4 +66,6 @@ public class RoomType {
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
+
+
 }

@@ -14,7 +14,6 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    // CREATE
     public Customer createRequest(CustomerCreateRequest request) {
         Customer customer = new Customer();
 
@@ -27,7 +26,6 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    // READ ALL
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
     }

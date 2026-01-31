@@ -1,5 +1,7 @@
 package com.example.QLP.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,9 +36,9 @@ public class Customer {
             fetch = FetchType.LAZY,
             orphanRemoval = true
     )
-    private List<Booking> bookings;
+//    @JsonManagedReference
+//    private List<Booking> bookings;
 
-    // ===== getters setters =====
 
     public Integer getCustomerId() {
         return customerId;
@@ -62,9 +64,9 @@ public class Customer {
         return date;
     }
 
-    public List<Booking> getBookings() {
-        return bookings;
-    }
+//    public List<Booking> getBookings() {
+//        return bookings;
+//    }
 
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
@@ -90,7 +92,7 @@ public class Customer {
         this.date = date;
     }
 
-    public void setBookings(List<Booking> bookings) {
-        this.bookings = bookings;
-    }
+//    public void setBookings(List<Booking> bookings) {
+//        this.bookings = bookings;
+//    }
 }
